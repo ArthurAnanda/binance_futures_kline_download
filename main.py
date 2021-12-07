@@ -3,16 +3,16 @@
 作者：Arthur
 说明：通过api: https://api.binance.com/api/v1/klines 下载币安永续合约k线分钟数据，支持分钟，小时等K线数据，在每次下载之后通过计算下一次数据开始时间点的方法解决数据重复或者缺漏问题。
 本脚本为下载程序入口，将k线数据通过多线程方法下载并保存为本地的feather文件
-注意：所有时间为东八区时间
+注意：所得数据所有时间为东八区时间，下载过程中需要打开全局代理，pandas版本：0.25.1以上版本，
 '''
 from utils import *
 
 MySet.pd_set(20, 20)
 
-coin_list = BinanceFuturesCoinList[:10]
+coin_list = BinanceFuturesCoinList[:10] # 下载数据币种列表，以前10个币种为例
 
 print(coin_list)
-interval = '15m'  # 一分钟数据
+interval = '15m'  # 以15分钟数据为例
 file_prefix = f'bi_f_kline_test'  # 文件名前缀
 err_list = []
 dir = ''  # feather 文件保存路径，默认空值为当前路径
